@@ -12,5 +12,7 @@ struct Position: Hashable {
 }
 
 protocol Algorithm {
+  var searchTask: Task<Void, Never>? { get set }
   func search(grid: GridModel, start: Position, end: Position, onUpdate: @escaping () -> Void)
+  func cancel()
 }

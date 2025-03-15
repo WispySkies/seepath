@@ -51,6 +51,5 @@ struct GridView: View {
     let model = GridModel(width: 20, height: 45)
     GridView(model: model)
     Spacer()
-    ControllerView(model: model, algorithm: {}, resetGrid: {model.reset()})
   }
 }

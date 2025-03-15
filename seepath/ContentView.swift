@@ -8,52 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject var model = GridModel(width: 20, height: 45)
-
-  @State private var selectedAlgorithm = "BFS"
-  @State private var isRunning = false
+  @StateObject var viewModel = ContentViewModel()
 
   var body: some View {
     VStack {
-      GridView(model: model)
+      GridView(model: viewModel.model)
 
       Spacer()
 
       ControllerView(
-        model: model,
-        algorithm: runAlgorithm,
-        resetGrid: {
-          model.reset()
-          isRunning = false
-        }
+        model: viewModel.model,
+        selectedAlgorithm: $viewModel.selectedAlgorithm,
+        isRunning: viewModel.isRunning,
+        algorithms: viewModel.algorithms,
+        algorithm: viewModel.runAlgorithm,
+        resetGrid: viewModel.resetGrid
       )
       .padding()
     }
     .padding()
-  }
-
-  func runAlgorithm() {
-    guard let start = model.start, let end = model.end else { return }
-    isRunning = true
-
-    switch selectedAlgorithm {
-    case "BFS":
-      let bfs = BFS()
-      bfs.search(grid: model, start: start, end: end) {
-        DispatchQueue.main.async {
-          model.objectWillChange.send()
-        }
-      }
-
-    case "DFS": break
-
-    case "A*": break
-
-    case "Dijkstra": break
-
-    default:
-      break
-    }
   }
 }
 
