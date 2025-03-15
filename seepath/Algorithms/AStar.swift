@@ -9,12 +9,18 @@ import Foundation
 
 class AStar: Algorithm {
   var searchTask: Task<Void, Never>?
+  var speed_ms: Int
+  
+  required init(speed: Int) {
+    speed_ms = speed
+  }
 
   func cancel() {
     searchTask?.cancel()
     searchTask = nil
   }
 
+  /* this implementation has a mind of it's own, it is non-determistic, glhf */
   func search(grid: GridModel, start: Position, end: Position, onUpdate: @escaping () -> Void) {
     searchTask = Task {
       var openSet: Set<Position> = [start]
@@ -68,7 +74,7 @@ class AStar: Algorithm {
                 grid.grid[neighbor.row][neighbor.col].isVisited = true
                 onUpdate()
               }
-              try? await Task.sleep(for: .milliseconds(50))
+              try? await Task.sleep(for: .milliseconds(speed_ms))
             }
           }
         }

@@ -19,6 +19,7 @@ struct ContentView: View {
       ControllerView(
         model: viewModel.model,
         selectedAlgorithm: $viewModel.selectedAlgorithm,
+        speed_ms: $viewModel.speed_ms,
         isRunning: viewModel.isRunning,
         algorithms: viewModel.algorithms,
         algorithm: viewModel.runAlgorithm,

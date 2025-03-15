@@ -9,6 +9,11 @@ import Foundation
 
 class DFS: Algorithm {
   var searchTask: Task<Void, Never>?
+  var speed_ms: Int
+  
+  required init(speed: Int) {
+    speed_ms = speed
+  }
 
   func search(grid: GridModel, start: Position, end: Position, onUpdate: @escaping () -> Void) {
     searchTask = Task {
@@ -43,7 +48,7 @@ class DFS: Algorithm {
           grid.grid[current.row][current.col].isVisited = true
           onUpdate()
         }
-        try? await Task.sleep(for: .milliseconds(50))
+        try? await Task.sleep(for: .milliseconds(speed_ms))
 
         for direction in directions {
           let neighbor = Position(

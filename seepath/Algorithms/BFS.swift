@@ -9,6 +9,11 @@ import Foundation
 
 class BFS: Algorithm {
   var searchTask: Task<Void, Never>?
+  var speed_ms: Int
+  
+  required init(speed: Int) {
+    speed_ms = speed
+  }
   
   func cancel() {
     searchTask?.cancel()
@@ -53,7 +58,7 @@ class BFS: Algorithm {
               grid.grid[neighbor.row][neighbor.col].isVisited = true
               onUpdate()
             }
-            try? await Task.sleep(for: .milliseconds(50))
+            try? await Task.sleep(for: .milliseconds(speed_ms))
           }
         }
       }
