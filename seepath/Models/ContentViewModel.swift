@@ -25,17 +25,11 @@ class ContentViewModel: ObservableObject {
     case "BFS":
       currentAlgorithm = BFS()
     case "DFS":
-      resetGrid()
-      return
-      //currentAlgorithm = DFS()
+      currentAlgorithm = DFS()
     case "A*":
-      resetGrid()
-      return
-      //currentAlgorithm = AStar()
+      currentAlgorithm = AStar()
     case "Dijkstra":
-      resetGrid()
-      return
-      //currentAlgorithm = Dijkstra()
+      currentAlgorithm = Dijkstra()
     default:
       resetGrid()
       return
