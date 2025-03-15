@@ -37,7 +37,11 @@ class GridModel: ObservableObject {
   
   func reset() {
     grid = Array(repeating: Array(repeating: Cell(), count: width), count: height)
-    start = nil
-    end = nil
+    grid[height - 2][1].isPath = true
+    grid[height - 2][1].mutable = false
+    grid[1][width - 2].isEnd = true
+    grid[1][width - 2].mutable = false
+    self.start = Position(row: height - 2, col: 1)
+    self.end = Position(row: 1, col: width - 2)
   }
 }

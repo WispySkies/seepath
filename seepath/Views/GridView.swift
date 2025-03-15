@@ -36,10 +36,10 @@ struct GridView: View {
       .black
     } else if cell.isEnd {
       .red
-    } else if cell.isVisited {
-      .blue
     } else if cell.isPath {
       .green
+    } else if cell.isVisited {
+      .blue
     } else {
       .white
     }

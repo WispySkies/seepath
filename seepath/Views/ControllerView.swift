@@ -10,7 +10,7 @@ import SwiftUI
 struct ControllerView: View {
   @ObservedObject var model: GridModel
   @State private var selectedAlgorithm = "BFS"
-  @State private var selectedPosition: String? = nil
+  @State private var isRunning = false
   let algorithms = ["BFS", "DFS", "A*", "Dijkstra"]
   
   var algorithm: () -> Void
@@ -23,23 +23,26 @@ struct ControllerView: View {
           Text(algo).tag(algo)
         }
       }
+      .pickerStyle(MenuPickerStyle())
+
       HStack {
-        Button(action: algorithm) {
+        Button(action: {algorithm()}) {
           Text("Run")
+            .padding()
+            .background(isRunning ? Color.gray : Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            .disabled(isRunning)
         }
         Button(action: resetGrid) {
           Text("Reset")
-        }
-      }
-      HStack {
-        Button(action: {selectedPosition = "start"})
-        {
-          Text("Set Start")
-        }
-        Button(action: {selectedPosition = "end"}) {
-          Text("Set End")
+            .padding()
+            .background(Color.red)
+            .foregroundColor(.white)
+            .cornerRadius(8)
         }
       }
     }
+    .padding()
   }
 }
