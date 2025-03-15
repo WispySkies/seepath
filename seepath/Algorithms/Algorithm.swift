@@ -6,6 +6,11 @@
 //
 import Foundation
 
+struct Position: Hashable {
+  let row: Int
+  let col: Int
+}
+
 protocol Algorithm {
-  func search(grid: GridModel, start: CGPoint, end: CGPoint, onUpdate: @escaping () -> Void)
+  func search(grid: GridModel, start: Position, end: Position, onUpdate: @escaping () -> Void)
 }

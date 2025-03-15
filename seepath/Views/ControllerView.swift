@@ -10,6 +10,7 @@ import SwiftUI
 struct ControllerView: View {
   @ObservedObject var model: GridModel
   @State private var selectedAlgorithm = "BFS"
+  @State private var selectedPosition: String? = nil
   let algorithms = ["BFS", "DFS", "A*", "Dijkstra"]
   
   var algorithm: () -> Void
@@ -28,6 +29,15 @@ struct ControllerView: View {
         }
         Button(action: resetGrid) {
           Text("Reset")
+        }
+      }
+      HStack {
+        Button(action: {selectedPosition = "start"})
+        {
+          Text("Set Start")
+        }
+        Button(action: {selectedPosition = "end"}) {
+          Text("Set End")
         }
       }
     }

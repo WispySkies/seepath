@@ -18,8 +18,8 @@ struct Cell: Identifiable {
 
 class GridModel: ObservableObject {
   @Published var grid: [[Cell]]
-  var start: (row: Int, col: Int)?
-  var end: (row: Int, col: Int)?
+  var start: Position?
+  var end: Position?
   let width: Int
   let height: Int
   
@@ -31,8 +31,8 @@ class GridModel: ObservableObject {
     grid[height - 2][1].mutable = false
     grid[1][width - 2].isEnd = true
     grid[1][width - 2].mutable = false
-    self.start = (height - 2, 1)
-    self.end = (1, width - 2)
+    self.start = Position(row: height - 2, col: 1)
+    self.end = Position(row: 1, col: width - 2)
   }
   
   func reset() {
